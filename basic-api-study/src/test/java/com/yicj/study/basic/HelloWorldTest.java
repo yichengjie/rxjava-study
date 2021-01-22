@@ -17,12 +17,12 @@ public class HelloWorldTest {
 
     @Test
     @DisplayName("基础发送")
-    void test1(){
+    void create(){
         //1. 创建被观察者
         Observable<String> novel = Observable.create(emitter -> {
             emitter.onNext("连载1");
             emitter.onNext("连载2");
-            int a = 1/0 ;
+            //int a = 1/0 ;
             emitter.onNext("连载3");
             emitter.onComplete();
         });
@@ -203,7 +203,8 @@ public class HelloWorldTest {
     /**
      * https://blog.csdn.net/Kongou/article/details/82629435
      * 自己如何使用RXJAVA的（网络请求封装）
-     * 终于来到重点了。在理解了RXJAVA轻松切换线程的情况下，我们可以在上面大做文章了。网络请求的处理是我们开发过程中需要切换线程比较频繁的地方。
+     * 终于来到重点了。在理解了RXJAVA轻松切换线程的情况下，我们可以在上面大做文章了。
+     * 网络请求的处理是我们开发过程中需要切换线程比较频繁的地方。
      * 通常耗时操作网络请求都会放在子线程中处理，而根据返回结果对UI进行的操作要放在主线程中进行。原始的方法就是在主线程中开启一个子线程，
      * 发起网络请求。之后在网络请求回调函数中在post到主线程。也有借助handler来实现的。通常这些方式实现之后，在读代码找关系逻辑的时候真的很绕，
      * 需要跳来跳去的。但是有了RXJAVA之后一切就不一样了，把请求和响应全在一条线上搞定。
