@@ -9,7 +9,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 public class MyServletApplication {
 
     //https://www.cnblogs.com/yangyquin/p/5428914.html
-    //https://blog.csdn.net/zcl_love_wx/article/details/52075428
     public static void main(String[] args) {
         SpringApplication.run(MyServletApplication.class, args) ;
     }

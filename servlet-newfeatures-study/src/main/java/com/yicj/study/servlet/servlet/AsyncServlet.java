@@ -16,36 +16,26 @@ public class AsyncServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		resp.setContentType("text/html;charset=utf-8");
 		PrintWriter out = resp.getWriter();
-		//out.write("hello, async test");
+		out.write("hello world <br/>");
 		out.println("start："+new Date()+". <br/>");
 		out.flush();
 		final AsyncContext ctx = req.startAsync(req,resp);
-		//ctx.setTimeout(3000);
-		new Thread(new MyTask(ctx)).start();
-		out.println("end："+new Date()+".<br/>");
-		out.flush();
-	}
-
-
-	class MyTask implements Runnable{
-		private AsyncContext ctx ;
-		public MyTask(AsyncContext ctx){
-			this.ctx = ctx ;
-		}
-		@Override
-		public void run() {
+		ctx.setTimeout(3000);
+		ctx.start(()->{
 			try {
 				Thread.sleep(2000);
-				PrintWriter out = ctx.getResponse().getWriter();
-				//out.write("aync thread processing");
-				//out.flush();
+				out.write("aync thread processing");
+				out.flush();
 				out.println("async end："+new Date()+".<br/>");
 				out.flush();
+				ctx.complete();
 			}catch (Exception e){
 				e.printStackTrace();
 			}
-		}
+		});
+		out.println("end："+new Date()+".<br/>");
+		out.flush();
 	}
- 
 }
