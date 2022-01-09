@@ -56,6 +56,4 @@ public class ErrorTest {
                 ()-> System.out.println("Emission completed")
         ) ;
     }
-
-
 }
