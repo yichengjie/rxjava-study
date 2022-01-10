@@ -4,6 +4,11 @@ import com.yicj.hello.utils.CommonUtil;
 import io.reactivex.Observable;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class ErrorTest {
 
     static void errorTest(int n){
@@ -55,5 +60,14 @@ public class ErrorTest {
                 Throwable::printStackTrace,
                 ()-> System.out.println("Emission completed")
         ) ;
+    }
+
+    @Test
+    void flapMap(){
+        List<String> list = Arrays.asList("11","12","13","14") ;
+        List<Integer> collect = list.stream()
+                .flatMap(item -> Stream.of(Integer.parseInt(item)))
+                .collect(Collectors.toList());
+        System.out.println(collect);
     }
 }
