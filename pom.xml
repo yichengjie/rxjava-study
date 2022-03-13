@@ -17,6 +17,7 @@
         <module>basic-api-study</module>
         <module>servlet-newfeatures-study</module>
         <module>hello-world</module>
+        <module>hello-redis</module>
     </modules>
     <packaging>pom</packaging>
 
